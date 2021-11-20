@@ -11,4 +11,8 @@ class GetProjectUseCase {
   List<ProjectEntity> getAll() {
     return projectRepository.getAll();
   }
+
+  public ProjectEntity getById(Long id) {
+    return projectRepository.getById(id);
+  }
 }

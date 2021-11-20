@@ -11,6 +11,10 @@ public class ProjectFacade {
   private final GetProjectUseCase getProjectUseCase;
   private final ProjectMapper projectMapper;
 
+  public ProjectResponseDto getById(Long id) {
+    return projectMapper.toResponseDto(getProjectUseCase.getById(id));
+  }
+
   public List<ProjectResponseDto> getAll() {
     return getProjectUseCase.getAll()
         .stream()

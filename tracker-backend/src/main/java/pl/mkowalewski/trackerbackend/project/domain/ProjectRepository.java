@@ -1,20 +1,28 @@
 package pl.mkowalewski.trackerbackend.project.domain;
 
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 class ProjectRepository {
 
-  private List<ProjectEntity> entities;
+  private Map<Long, ProjectEntity> entities;
   private Long nextId = 1L;
 
+  public ProjectEntity getById(Long id) {
+    return entities.get(id);
+  }
+
   List<ProjectEntity> getAll() {
-    return entities;
+    return entities.values()
+        .stream()
+        .collect(Collectors.toList());
   }
 
   public ProjectRepository() {
-    entities = new LinkedList<>();
-    entities.add(ProjectEntity.builder().id(nextId++).name("Projekt 1").build());
-    entities.add(ProjectEntity.builder().id(nextId++).name("Projekt 2").build());
+    entities = Map.of(
+        nextId, ProjectEntity.builder().id(nextId++).name("Projekt 1").build(),
+        nextId, ProjectEntity.builder().id(nextId++).name("Projekt 2").build()
+    );
   }
 }
