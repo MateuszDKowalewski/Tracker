@@ -2,6 +2,7 @@ package pl.mkowalewski.trackerbackend.project;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ class ProjectController {
 
   private final ProjectFacade projectFacade;
 
-  @GetMapping(path = "/all")
+  @GetMapping(path = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
   private ResponseEntity<List<ProjectResponseDto>> getAllProjects() {
     List<ProjectResponseDto> response = projectFacade.getAll();
     return ResponseEntity.ok(response);
