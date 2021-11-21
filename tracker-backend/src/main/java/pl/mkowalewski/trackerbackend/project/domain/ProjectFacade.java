@@ -9,6 +9,7 @@ import pl.mkowalewski.trackerbackend.project.dto.ProjectResponseDto;
 public class ProjectFacade {
 
   private final GetProjectUseCase getProjectUseCase;
+  private final SaveProjectUseCase saveProjectUseCase;
   private final ProjectMapper projectMapper;
 
   public ProjectResponseDto getById(Long id) {
@@ -20,5 +21,9 @@ public class ProjectFacade {
         .stream()
         .map(projectMapper::toResponseDto)
         .collect(Collectors.toList());
+  }
+
+  public ProjectResponseDto createProject(ProjectCreateDto projectCreateDto) {
+    return projectMapper.toResponseDto(saveProjectUseCase.createProject(projectCreateDto));
   }
 }

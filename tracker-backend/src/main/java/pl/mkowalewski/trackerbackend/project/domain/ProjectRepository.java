@@ -1,5 +1,6 @@
 package pl.mkowalewski.trackerbackend.project.domain;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -8,6 +9,14 @@ class ProjectRepository {
 
   private Map<Long, ProjectEntity> entities;
   private Long nextId = 1L;
+
+  public ProjectEntity save(ProjectEntity entity) {
+    if(entity.getId() == null) {
+      entity.setId(nextId++);
+    }
+    entities.put(entity.getId(), entity);
+    return entity;
+  }
 
   public ProjectEntity getById(Long id) {
     return entities.get(id);
@@ -20,9 +29,8 @@ class ProjectRepository {
   }
 
   public ProjectRepository() {
-    entities = Map.of(
-        nextId, ProjectEntity.builder().id(nextId++).name("Projekt 1").build(),
-        nextId, ProjectEntity.builder().id(nextId++).name("Projekt 2").build()
-    );
+    entities = new HashMap<>();
+    entities.put(nextId, ProjectEntity.builder().id(nextId++).name("Projekt 1").build());
+    entities.put(nextId, ProjectEntity.builder().id(nextId++).name("Projekt 2").build());
   }
 }

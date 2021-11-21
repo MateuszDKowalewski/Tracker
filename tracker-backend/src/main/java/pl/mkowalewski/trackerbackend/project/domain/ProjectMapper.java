@@ -8,4 +8,6 @@ abstract class ProjectMapper {
 
   abstract ProjectResponseDto toResponseDto(ProjectEntity entity);
 
+  abstract ProjectEntity toEntity(ProjectCreateDto createDto);
+
 }

@@ -1,13 +1,18 @@
 package pl.mkowalewski.trackerbackend.project;
 
 import java.util.List;
+import javax.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.mkowalewski.trackerbackend.project.domain.ProjectCreateDto;
 import pl.mkowalewski.trackerbackend.project.domain.ProjectFacade;
 import pl.mkowalewski.trackerbackend.project.dto.ProjectResponseDto;
 
@@ -28,6 +33,16 @@ class ProjectController {
   private ResponseEntity<List<ProjectResponseDto>> getAllProjects() {
     List<ProjectResponseDto> response = projectFacade.getAll();
     return ResponseEntity.ok(response);
+  }
+
+  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+  private ResponseEntity<ProjectResponseDto> createProject(
+      @RequestBody @Valid  ProjectCreateDto projectCreateDto
+  ) {
+    ProjectResponseDto response = projectFacade.createProject(projectCreateDto);
+    return ResponseEntity
+        .status(HttpStatus.CREATED)
+        .body(response);
   }
 
 }
