@@ -9,12 +9,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.mkowalewski.trackerbackend.project.domain.ProjectCreateDto;
+import pl.mkowalewski.trackerbackend.project.dto.ProjectCreateDto;
 import pl.mkowalewski.trackerbackend.project.domain.ProjectFacade;
 import pl.mkowalewski.trackerbackend.project.dto.ProjectResponseDto;
+import pl.mkowalewski.trackerbackend.project.dto.ProjectUpdateDto;
 
 @RestController
 @RequestMapping("/project")
@@ -43,6 +45,14 @@ class ProjectController {
     return ResponseEntity
         .status(HttpStatus.CREATED)
         .body(response);
+  }
+
+  @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+  private ResponseEntity<ProjectResponseDto> updateProject(
+      @RequestBody @Valid ProjectUpdateDto projectUpdateDto
+  ) {
+    ProjectResponseDto response = projectFacade.updateProject(projectUpdateDto);
+    return ResponseEntity.ok(response);
   }
 
 }

@@ -3,7 +3,9 @@ package pl.mkowalewski.trackerbackend.project.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
+import pl.mkowalewski.trackerbackend.project.dto.ProjectCreateDto;
 import pl.mkowalewski.trackerbackend.project.dto.ProjectResponseDto;
+import pl.mkowalewski.trackerbackend.project.dto.ProjectUpdateDto;
 
 @AllArgsConstructor
 public class ProjectFacade {
@@ -25,5 +27,9 @@ public class ProjectFacade {
 
   public ProjectResponseDto createProject(ProjectCreateDto projectCreateDto) {
     return projectMapper.toResponseDto(saveProjectUseCase.createProject(projectCreateDto));
+  }
+
+  public ProjectResponseDto updateProject(ProjectUpdateDto projectUpdateDto) {
+    return projectMapper.toResponseDto(saveProjectUseCase.updateProject(projectUpdateDto));
   }
 }

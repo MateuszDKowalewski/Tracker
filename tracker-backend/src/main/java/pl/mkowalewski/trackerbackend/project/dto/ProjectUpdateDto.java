@@ -1,6 +1,7 @@
-package pl.mkowalewski.trackerbackend.project.domain;
+package pl.mkowalewski.trackerbackend.project.dto;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +13,10 @@ import lombok.Setter;
 @Builder
 @Getter
 @Setter
-public class ProjectCreateDto {
+public class ProjectUpdateDto {
+
+  @NotNull
+  private Long id;
 
   @NotBlank
   private String name;
