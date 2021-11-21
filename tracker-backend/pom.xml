@@ -20,6 +20,7 @@
     <spring-boot.version>2.6.0</spring-boot.version>
     <lombok.version>1.18.22</lombok.version>
     <mapstruct.version>1.4.2.Final</mapstruct.version>
+    <javax-validation.version>2.0.1.Final</javax-validation.version>
   </properties>
 
   <dependencies>
@@ -34,14 +35,15 @@
       <artifactId>spring-boot-starter</artifactId>
       <version>${spring-boot.version}</version>
     </dependency>
-
-    <!-- UTILS -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>${lombok.version}</version>
       <optional>true</optional>
     </dependency>
+
+
+    <!-- UTILS -->
     <dependency>
       <groupId>org.mapstruct</groupId>
       <artifactId>mapstruct</artifactId>
@@ -52,6 +54,11 @@
       <artifactId>mapstruct-processor</artifactId>
       <version>${mapstruct.version}</version>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+      <version>${javax-validation.version}</version>
     </dependency>
 
     <!-- TEST -->
